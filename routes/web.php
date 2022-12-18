@@ -15,5 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[\App\Http\Controllers\TasksController::class, 'index']);
 Route::post('/addTask', [\App\Http\Controllers\TasksController::class, 'addTask']);
-
+Route::post('/in-progress/{task}', [\App\Http\Controllers\TasksController::class, 'statusInProgress']);
+Route::post('/done/{task}', [\App\Http\Controllers\TasksController::class, 'statusDone']);
+Route::delete('/delete/{task}', [\App\Http\Controllers\TasksController::class, 'deleteTask']);
 

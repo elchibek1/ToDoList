@@ -34,14 +34,15 @@ class TasksController extends Controller
         return redirect()->action([self::class, 'index'])->with('message', "task {$task->task} completed");
     }
 
-    public function deleteTask()
+    public function deleteTask(Task $task)
     {
-
+        $task->delete();
+        return redirect()->action([self::class, 'index'])->with('message', "task {$task->task} deleted");
     }
 
     public function deleteAllTask()
     {
-
+        
     }
 
 }

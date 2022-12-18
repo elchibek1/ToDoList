@@ -1,11 +1,12 @@
 @extends('main.base')
 @section('content')
+    @if(session('message'))
+        <div class="alert alert-primary" role="alert">
+            {{ session('message') }}
+        </div>
+    @endif
     <div class="container mt-5 bg-warning">
-        @if(session('message'))
-            <div class="alert alert-primary" role="alert">
-                {{ session('message') }}
-            </div>
-        @endif
+
         <h3 class="text-center mb-5 text-success">All Tasks</h3>
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -34,18 +35,18 @@
                         <td>{{$task->status}}</td>
                         <td>
                             @if($task->status == \App\Models\Task::NEW)
-                                <form action="{{action([\App\Http\Controllers\TasksController::class, "statusInProgress"], ["task" => $task])}}" method="post">
+                                <form style="display: inline-block" action="{{action([\App\Http\Controllers\TasksController::class, "statusInProgress"], ["task" => $task])}}" method="post">
                                    @csrf
                                     <button type="submit" class="btn btn-primary">start executing</button>
                                 </form>
                             @endif
                             @if($task->status == \App\Models\Task::INPROGRESS)
-                                    <form action="{{action([\App\Http\Controllers\TasksController::class, "statusDone"], ["task" => $task])}}" method="post">
+                                    <form style="display: inline-block" action="{{action([\App\Http\Controllers\TasksController::class, "statusDone"], ["task" => $task])}}" method="post">
                                         @csrf
                                         <button type="submit" class="btn btn-primary">finish executing</button>
                                     </form>
                                 @endif
-                                <form action="{{action([\App\Http\Controllers\TasksController::class, "deleteTask"], ["task" => $task])}}" method="post">
+                                <form style="display: inline-block" action="{{action([\App\Http\Controllers\TasksController::class, "deleteTask"], ["task" => $task])}}" method="post">
                                     @method('delete')
                                     @csrf
                                     <button type="submit" class="btn btn-primary">delete</button>
@@ -55,8 +56,6 @@
                 @endforeach
                 </tbody>
             </table>
-
-
             <div class="container">
                 <h2 class="text-success text-center mt-3">Add a new task</h2>
                 <div class="row">
