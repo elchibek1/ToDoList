@@ -6,7 +6,7 @@
                 {{ session('message') }}
             </div>
         @endif
-        <h3>All Tasks</h3>
+        <h3 class="text-center mb-5 text-success">All Tasks</h3>
         <div class="row">
             <table class="table table-striped text-success">
                 <thead>
@@ -28,6 +28,13 @@
                 @endforeach
                 </tbody>
             </table>
+            <div class="container">
+                <div class="row">
+                    <form action="{{action([\App\Http\Controllers\TasksController::class, 'addTask'])}}" method="POST">
+                        {{csrf_field()}}
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

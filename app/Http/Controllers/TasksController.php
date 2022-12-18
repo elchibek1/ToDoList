@@ -13,9 +13,11 @@ class TasksController extends Controller
         return view('main.index', compact('tasks'));
     }
 
-    public function addTask()
+    public function addTask(Request $request)
     {
-
+        $task = new Task($request->all());
+        $task->save();
+        return redirect()->action([self::class, 'index'])->with('message', 'task added successfully');
     }
 
     public function statusInProgress()
