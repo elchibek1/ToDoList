@@ -17,17 +17,21 @@ class TasksController extends Controller
     {
         $task = new Task($request->all());
         $task->save();
-        return redirect()->action([self::class, 'index'])->with('message', 'task added successfully');
+        return redirect()->action([self::class, 'index'])->with('message', "task {$task->task} added successfully");
     }
 
-    public function statusInProgress()
+    public function statusInProgress(Task $task)
     {
-
+        $task->status = Task::INPROGRESS;
+        $task->save();
+        return redirect()->action([self::class, 'index'])->with('message', "task {$task->task} gets to work");
     }
 
-    public function statusDone()
+    public function statusDone(Task $task)
     {
-
+        $task->status = Task::DONE;
+        $task->save();
+        return redirect()->action([self::class, 'index'])->with('message', "task {$task->task} completed");
     }
 
     public function deleteTask()

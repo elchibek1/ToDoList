@@ -32,11 +32,31 @@
                         <td>{{$task->id}}</td>
                         <td>{{$task->task}}</td>
                         <td>{{$task->status}}</td>
-                        <td></td>
+                        <td>
+                            @if($task->status == \App\Models\Task::NEW)
+                                <form action="{{action([\App\Http\Controllers\TasksController::class, "statusInProgress"], ["task" => $task])}}" method="post">
+                                   @csrf
+                                    <button type="submit" class="btn btn-primary">start executing</button>
+                                </form>
+                            @endif
+                            @if($task->status == \App\Models\Task::INPROGRESS)
+                                    <form action="{{action([\App\Http\Controllers\TasksController::class, "statusDone"], ["task" => $task])}}" method="post">
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary">finish executing</button>
+                                    </form>
+                                @endif
+                                <form action="{{action([\App\Http\Controllers\TasksController::class, "deleteTask"], ["task" => $task])}}" method="post">
+                                    @method('delete')
+                                    @csrf
+                                    <button type="submit" class="btn btn-primary">delete</button>
+                                </form>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
+
+
             <div class="container">
                 <h2 class="text-success text-center mt-3">Add a new task</h2>
                 <div class="row">
