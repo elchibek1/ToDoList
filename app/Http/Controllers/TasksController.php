@@ -42,7 +42,15 @@ class TasksController extends Controller
 
     public function deleteAllTask()
     {
-        
+        $tasks = Task::all();
+        foreach ($tasks as $task)
+        {
+            if($task->status == Task::DONE)
+            {
+                $task->delete();
+            }
+        }
+        return redirect()->action([self::class, 'index'])->with('message', "all tasks with a status od done have been deleted");
     }
 
 }

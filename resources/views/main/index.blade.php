@@ -17,6 +17,14 @@
                     </ul>
                 </div>
             @endif
+        <div class="row text-end">
+            <form action="{{action([\App\Http\Controllers\TasksController::class, 'deleteAllTask'])}}" method="get">
+                @csrf
+                <button type="submit" class="btn btn-success">
+                    Delete tasks
+                </button>
+            </form>
+        </div>
         <div class="row">
             <table class="table table-striped text-success">
                 <thead>
@@ -37,19 +45,19 @@
                             @if($task->status == \App\Models\Task::NEW)
                                 <form style="display: inline-block" action="{{action([\App\Http\Controllers\TasksController::class, "statusInProgress"], ["task" => $task])}}" method="post">
                                    @csrf
-                                    <button type="submit" class="btn btn-primary">start executing</button>
+                                    <button type="submit" class="btn btn-success">start executing</button>
                                 </form>
                             @endif
                             @if($task->status == \App\Models\Task::INPROGRESS)
                                     <form style="display: inline-block" action="{{action([\App\Http\Controllers\TasksController::class, "statusDone"], ["task" => $task])}}" method="post">
                                         @csrf
-                                        <button type="submit" class="btn btn-primary">finish executing</button>
+                                        <button type="submit" class="btn btn-success">finish executing</button>
                                     </form>
                                 @endif
                                 <form style="display: inline-block" action="{{action([\App\Http\Controllers\TasksController::class, "deleteTask"], ["task" => $task])}}" method="post">
                                     @method('delete')
                                     @csrf
-                                    <button type="submit" class="btn btn-primary">delete</button>
+                                    <button type="submit" class="btn btn-success">delete</button>
                                 </form>
                         </td>
                     </tr>
@@ -64,11 +72,12 @@
                         <div class="form-group">
                             <input class="form-control" type="text" id="task" name="task" placeholder="To do.."/>
                         </div>
-                        <div class="mt-3 text-center">
-                            <button type="submit" class="btn btn-primary">Add</button>
+                        <div class="mt-3 text-center pb-3">
+                            <button type="submit" class="btn btn-success">Add</button>
                         </div>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>
