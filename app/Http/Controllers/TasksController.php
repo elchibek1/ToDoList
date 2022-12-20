@@ -28,8 +28,16 @@ class TasksController extends Controller
     public function update(Request $request,Task $task)
     {
         $validated = $request->validate(
-            ['task' => 're']
+            ['task' => 'required|max:128']
         );
+        $task->update($validated);
+        return redirect()->action([self::class, "show"], compact('task'))->with('message', "task {$task->task} updated successfully");
+
+    }
+
+    public function show(Task $task)
+    {
+        return view('main.show', compact('task'));
     }
 
     public function statusInProgress(Task $task)
