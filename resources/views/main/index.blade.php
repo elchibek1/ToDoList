@@ -39,7 +39,12 @@
                 @foreach($tasks as $task)
                     <tr>
                         <td>{{$task->id}}</td>
-                        <td>{{$task->task}}</td>
+                        <td>
+                            <a href="{{action([\App\Http\Controllers\TasksController::class, "show"], ["task" => $task])}}">
+                                {{$task->task}}
+                            </a>
+
+                        </td>
                         <td>{{$task->status}}</td>
                         <td>
                             @if($task->status == \App\Models\Task::NEW)
@@ -58,10 +63,6 @@
                                     @method('delete')
                                     @csrf
                                     <button type="submit" class="btn btn-success">delete</button>
-                                </form>
-                                <form  style="display: inline-block" action="{{action([\App\Http\Controllers\TasksController::class, 'edit'], ["task" => $task])}}" method="get">
-                                    @csrf
-                                    <button type="submit" class="btn btn-success">edit</button>
                                 </form>
                         </td>
                     </tr>

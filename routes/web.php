@@ -19,4 +19,5 @@ Route::post('/in-progress/{task}', [\App\Http\Controllers\TasksController::class
 Route::post('/done/{task}', [\App\Http\Controllers\TasksController::class, 'statusDone']);
 Route::delete('/delete/{task}', [\App\Http\Controllers\TasksController::class, 'deleteTask']);
 Route::get('/delete-all-tasks', [\App\Http\Controllers\TasksController::class, 'deleteAllTask']);
-Route::get('/edit', [\App\Http\Controllers\TasksController::class, 'edit']);
+Route::get('/edited/{task}/edit', [\App\Http\Controllers\TasksController::class, 'edit']);
+Route::get('/show/{task}', [\App\Http\Controllers\TasksController::class, 'show']);
