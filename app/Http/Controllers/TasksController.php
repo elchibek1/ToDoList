@@ -20,6 +20,18 @@ class TasksController extends Controller
         return redirect()->action([self::class, 'index'])->with('message', "task {$task->task} added successfully");
     }
 
+    public function edit(Task $task)
+    {
+        return view('main.edit', compact('task'));
+    }
+
+    public function update(Request $request,Task $task)
+    {
+        $validated = $request->validate(
+            ['task' => 're']
+        );
+    }
+
     public function statusInProgress(Task $task)
     {
         $task->status = Task::INPROGRESS;
@@ -33,6 +45,7 @@ class TasksController extends Controller
         $task->save();
         return redirect()->action([self::class, 'index'])->with('message', "task {$task->task} completed");
     }
+
 
     public function deleteTask(Task $task)
     {
