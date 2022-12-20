@@ -21,3 +21,5 @@ Route::delete('/delete/{task}', [\App\Http\Controllers\TasksController::class, '
 Route::get('/delete-all-tasks', [\App\Http\Controllers\TasksController::class, 'deleteAllTask']);
 Route::get('/{task}/edit', [\App\Http\Controllers\TasksController::class, 'edit']);
 Route::get('/show/{task}', [\App\Http\Controllers\TasksController::class, 'show']);
+Route::put('/update/{task}', [\App\Http\Controllers\TasksController::class, 'update']);
+
