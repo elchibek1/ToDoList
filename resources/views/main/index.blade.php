@@ -59,6 +59,10 @@
                                     @csrf
                                     <button type="submit" class="btn btn-success">delete</button>
                                 </form>
+                                <form  style="display: inline-block" action="{{action([\App\Http\Controllers\TasksController::class, 'edit'], ["task" => $task])}}" method="get">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success">edit</button>
+                                </form>
                         </td>
                     </tr>
                 @endforeach
