@@ -10,10 +10,7 @@ class Task extends Model
     use HasFactory;
 
     protected $fillable = ['task', 'status'];
-
     public const NEW = 'new';
     public const INPROGRESS = 'in_progress';
     public const DONE = 'done';
-
-
 }

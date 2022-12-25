@@ -17,6 +17,21 @@
                     </ul>
                 </div>
             @endif
+        <div class="container">
+            <h2 class="text-success text-center mt-3">Add a new task</h2>
+            <div class="row">
+                <form action="{{action([\App\Http\Controllers\TasksController::class, 'addTask'])}}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <input class="form-control" type="text" id="task" name="task" placeholder="To do.."/>
+                    </div>
+                    <div class="mt-3 text-center pb-3">
+                        <button type="submit" class="btn btn-success">Add</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
         <div class="row text-end">
             <form action="{{action([\App\Http\Controllers\TasksController::class, 'deleteAllTask'])}}" method="get">
                 @csrf
@@ -38,7 +53,7 @@
                 <tbody>
                 @foreach($tasks as $task)
                     <tr>
-                        <td>{{$task->id}}</td>
+                        <td> {{$loop->iteration}}</td>
                         <td>
                             <a href="{{action([\App\Http\Controllers\TasksController::class, "show"], ["task" => $task])}}">
                                 {{$task->task}}
@@ -69,21 +84,7 @@
                 @endforeach
                 </tbody>
             </table>
-            <div class="container">
-                <h2 class="text-success text-center mt-3">Add a new task</h2>
-                <div class="row">
-                    <form action="{{action([\App\Http\Controllers\TasksController::class, 'addTask'])}}" method="POST">
-                        @csrf
-                        <div class="form-group">
-                            <input class="form-control" type="text" id="task" name="task" placeholder="To do.."/>
-                        </div>
-                        <div class="mt-3 text-center pb-3">
-                            <button type="submit" class="btn btn-success">Add</button>
-                        </div>
-                    </form>
-                </div>
 
-            </div>
         </div>
     </div>
 @endsection
